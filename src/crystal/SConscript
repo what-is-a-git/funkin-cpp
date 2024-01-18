@@ -1,0 +1,6 @@
+Import('env')
+Import('build_target')
+
+SConscript('core/SConscript')
+SConscript('scene/SConscript')
+SConscript('assets/SConscript')

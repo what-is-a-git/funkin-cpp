@@ -1,0 +1,5 @@
+Import('env')
+Import('build_target')
+
+env.Object(target='#/' + build_target + 'core-audio-server', source=['audio_server.cpp'])
+env.Object(target='#/' + build_target + 'core-audio-stream', source=['audio_stream.cpp'])

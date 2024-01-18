@@ -1,0 +1,15 @@
+Import('env')
+Import('build_target')
+
+env.Object(target='#/' + build_target + 'core-engine', source=['engine.cpp'])
+env.Object(target='#/' + build_target + 'core-color', source=['color.cpp'])
+env.Object(target='#/' + build_target + 'core-timer', source=['timer.cpp'])
+env.Object(target='#/' + build_target + 'core-clock', source=['clock.cpp'])
+env.Object(target='#/' + build_target + 'core-file_system', source=['file_system.cpp'])
+env.Object(target='#/' + build_target + 'core-ref_counted', source=['ref_counted.cpp'])
+env.Object(target='#/' + build_target + 'core-math', source=['math.cpp'])
+
+SConscript('input/SConscript')
+SConscript('audio/SConscript')
+SConscript('rendering/SConscript')
+SConscript('debug/SConscript')

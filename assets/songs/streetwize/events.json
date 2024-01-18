@@ -1,0 +1,161 @@
+{
+	"song": {
+		"events": [
+			[
+				12765.9574468085,
+				[
+					[
+						"Camera Follow Pos",
+						"990",
+						"541"
+					],
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.7"
+					]
+				]
+			],
+			[
+				13617.0212765957,
+				[
+					[
+						"Change Character",
+						"dad",
+						"kookS"
+					],
+					[
+						"Change Character",
+						"bf",
+						"pook-playerS"
+					],
+					[
+						"Change Character",
+						"gf",
+						"radioS"
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					],
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.8"
+					],
+					[
+						"Green People",
+						"",
+						""
+					]
+				]
+			],
+			[
+				20425.5319148936,
+				[
+					[
+						"Change Character",
+						"bf",
+						"pook-player"
+					],
+					[
+						"Change Character",
+						"dad",
+						"kook"
+					],
+					[
+						"Change Character",
+						"gf",
+						"radio"
+					],
+					[
+						"Green People",
+						"",
+						""
+					]
+				]
+			],
+			[
+				39148.9361702128,
+				[
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.9"
+					]
+				]
+			],
+			[
+				40851.0638297872,
+				[
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.8"
+					],
+					[
+						"Change Character",
+						"dad",
+						"kookSG"
+					]
+				]
+			],
+			[
+				49361.7021276596,
+				[
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.91"
+					]
+				]
+			],
+			[
+				50212.7659574468,
+				[
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.8"
+					]
+				]
+			],
+			[
+				81702.1276595745,
+				[
+					[
+						"Change Character",
+						"dad",
+						"kook"
+					]
+				]
+			],
+			[
+				95319.1489361703,
+				[
+					[
+						"Camera Follow Pos",
+						"990",
+						"541"
+					],
+					[
+						"Set Property",
+						"defaultCamZoom",
+						"0.7"
+					],
+					[
+						"Set Property",
+						"cameraSpeed",
+						"0.75"
+					],
+					[
+						"Set Property",
+						"camZoomingDecay",
+						"0.8 "
+					]
+				]
+			]
+		]
+	}
+}

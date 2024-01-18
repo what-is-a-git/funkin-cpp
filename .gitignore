@@ -1,0 +1,10 @@
+# Buildsystem
+bin
+build
+*.o
+
+# SCons
+.sconsign*.dblite
+
+# VSCode
+.vscode

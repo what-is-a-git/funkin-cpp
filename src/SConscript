@@ -1,0 +1,8 @@
+Import('env')
+Import('build_target')
+
+SConscript('crystal/SConscript')
+SConscript('vendor/SConscript')
+SConscript('funkin/SConscript')
+
+env.Object(target='main', source=['main.cpp'])

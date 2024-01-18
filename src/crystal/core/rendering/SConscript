@@ -1,0 +1,7 @@
+Import('env')
+Import('build_target')
+
+env.Object(target='#/' + build_target + 'core-rendering-server', source=['rendering_server.cpp'])
+env.Object(target='#/' + build_target + 'core-rendering-window', source=['window.cpp'])
+env.Object(target='#/' + build_target + 'core-rendering-shader', source=['shader.cpp'])
+env.Object(target='#/' + build_target + 'core-rendering-texture', source=['texture.cpp'])

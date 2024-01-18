@@ -1,0 +1,4 @@
+Import('env')
+Import('build_target')
+
+env.Object(target='#/' + build_target + 'core-debug-di', source=['debug_info.cpp'])
