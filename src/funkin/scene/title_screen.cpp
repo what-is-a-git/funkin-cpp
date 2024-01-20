@@ -2,6 +2,8 @@
 #include <cstring>
 #include "glad/glad.h"
 
+#include "core/engine.h"
+#include "core/input/input_server.h"
 #include "assets/asset_server.h"
 #include "core/rendering/rendering_server.h"
 #include "core/rendering/shader.h"
@@ -137,12 +139,16 @@ namespace funkin {
         return m;
     }
 
-    TitleScreen::TitleScreen() {
-        
-    }
+    TitleScreen::TitleScreen() {}
 
-    TitleScreen::~TitleScreen() {
+    TitleScreen::~TitleScreen() {}
 
+    void TitleScreen::on_switch_dispose(void) {
+        delete cool;
+        free(vertices);
+
+        glDeleteVertexArrays(1, &vao);
+        glDeleteBuffers(1, &vbo);
     }
 
     void TitleScreen::init(void) {
@@ -166,32 +172,61 @@ namespace funkin {
         balls = crystal::AssetServer::get_texture("MISSING_TEXTURE");
         vertices = (Vertex*)malloc(sizeof(Vertex) * vertex_capacity);
         mvp = {0};
+
+        batched_sprites = new crystal::BatchedSprites(crystal::BatchingMode::BAKED, 65534);
+        batched_sprites->position = glm::dvec2(16.0, 16.0);
+
+        for (int i = 0; i < 128; i++) {
+            double x = i * 32.0;
+            double y = 0.0;
+
+            if (x >= 1280.0 - 32.0) {
+                y = floor(x / (1280.0 - 32.0)) * 32.0;
+                x = fmod(x, 1280.0 - 32.0);
+            }
+
+            batched_sprites->add_batched_sprite({
+                glm::vec4(0.0f, 0.0f, -1.0f, -1.0f),
+                glm::dvec2(x, y), glm::dvec2(0.5, 0.5), glm::dvec2(0.0),
+                0.0
+            });
+        }
+
+        batched_sprites->refresh(false);
     }
 
     void TitleScreen::step(const double delta) {
+        // testing scene switch memory leaks, still an issue BUT it's less than 0.1 mib so it's hopefully ok :sob:
+        if (crystal::InputServer::is_key_pressed(GLFW_KEY_SPACE) && crystal::Engine::can_transition()) {
+            crystal::Engine::switch_scene_to(new TitleScreen());
+            return;
+        }
 
+        batched_sprites->step(delta);
     }
 
     void TitleScreen::draw(void) {
-        r_mvp(mat_ortho(0, 1280.0f, 720.0f, 0, -1.0f, 1.0f));
+        // r_mvp(mat_ortho(0, 1280.0f, 720.0f, 0, -1.0f, 1.0f));
 
-        Alien ch = {
-            .px = 0,
-            .py = 0,
-            .tx = 0,
-            .ty = 0,
-            .tw = 64,
-            .th = 64,
-        };
+        // Alien ch = {
+        //     .px = 0,
+        //     .py = 0,
+        //     .tx = 0,
+        //     .ty = 0,
+        //     .tw = 64,
+        //     .th = 64,
+        // };
 
-        for (int i = 0; i < 1000; i++) {
-            ch.px = (sin(i) * 640) + 640;
-            ch.px -= 32;
-            ch.py = (cos(i) * 360) + 360;
-            ch.py -= 32;
-            draw_alien(balls, ch);
-        }
+        // for (int i = 0; i < 1000; i++) {
+        //     ch.px = (sin(i) * 640) + 640;
+        //     ch.px -= 32;
+        //     ch.py = (cos(i) * 360) + 360;
+        //     ch.py -= 32;
+        //     draw_alien(balls, ch);
+        // }
 
-        r_flush();
+        // r_flush();
+
+        batched_sprites->draw();
     }
 }

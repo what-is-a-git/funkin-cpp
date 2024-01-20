@@ -77,7 +77,9 @@ namespace crystal {
             static double get_elapsed(void);
             static bool get_should_close(void);
 
+            static bool can_transition(void);
             static void switch_scene_to(Scene *new_scene);
+            static TransitionState get_transition_state(void);
 
             static void callback_window_close(GLFWwindow *window);
     };

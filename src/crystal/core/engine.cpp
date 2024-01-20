@@ -113,8 +113,9 @@ namespace crystal {
         if (_transition_clock.time >= 0.5 && _transition_state == IN) {
             _transition_state = HOLD;
 
+            _transition_scene->on_switch_dispose();
             _current_scene->init();
-            _transition_scene->~Scene();
+            delete _transition_scene;
 
             // We have to use it here because _current_scene->init() can cause a shader state change.
             _transition_shader->use();
@@ -185,10 +186,23 @@ namespace crystal {
         return RenderingServer::get_primary_window()->get_should_close();
     }
 
+    bool Engine::can_transition(void) {
+        return _transition_state == NONE;
+    }
+
     void Engine::switch_scene_to(Scene *new_scene) {
+        if (!can_transition()) {
+            fprintf(stderr, "WARNING: The game is trying to switch to a scene mid transition and is most likely leaking a little memory.\n");
+            return;
+        }
+
         _transition_state = IN;
         _transition_scene = _current_scene;
         _current_scene = new_scene;
+    }
+
+    TransitionState Engine::get_transition_state(void) {
+        return _transition_state;
     }
 
     void Engine::callback_window_close(GLFWwindow *window) {

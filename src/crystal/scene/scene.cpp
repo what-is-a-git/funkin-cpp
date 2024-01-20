@@ -9,4 +9,5 @@ namespace crystal {
     void Scene::init(void) {};
     void Scene::step(const double delta) {};
     void Scene::draw(void) {};
+    void Scene::on_switch_dispose(void) {};
 }

@@ -11,9 +11,6 @@
 namespace crystal {
     class Sprite2D {
         private:
-            int _texture_filter_mode;
-            int _texture_wrap_mode;
-
             glm::uvec2 _size;
             Texture *_texture;
 
@@ -23,8 +20,7 @@ namespace crystal {
 
             glm::vec4 source_rect;
 
-            glm::dvec2 position;
-            glm::dvec2 scale;
+            glm::dvec2 position, scale;
             double rotation;
 
             glm::dvec2 origin;
@@ -32,8 +28,7 @@ namespace crystal {
             Color tint;
             Shader *shader;
 
-            int texture_filter_mode;
-            int texture_wrap_mode;
+            int texture_filter_mode, texture_wrap_mode;
 
             Sprite2D();
             Sprite2D(double x, double y);

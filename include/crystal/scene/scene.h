@@ -12,5 +12,7 @@ namespace crystal {
             virtual void init(void);
             virtual void step(const double delta);
             virtual void draw(void);
+
+            virtual void on_switch_dispose(void);
     };
 }

@@ -6,3 +6,4 @@ env.Object(target='#/' + build_target + 'scene-sprite_2d', source=['sprite_2d.cp
 env.Object(target='#/' + build_target + 'scene-color_rect', source=['color_rect.cpp'])
 env.Object(target='#/' + build_target + 'scene-startup_scene', source=['startup_scene.cpp'])
 env.Object(target='#/' + build_target + 'scene-audio_stream_player', source=['audio_stream_player.cpp'])
+env.Object(target='#/' + build_target + 'scene-batched_sprites', source=['batched_sprites.cpp'])

@@ -70,6 +70,7 @@ namespace crystal {
     // may be helpful in cases where including glad/glad.h isn't ideal or wanted.
     void Sprite2D::set_antialiased(bool antialiased) {
         texture_filter_mode = antialiased ? GL_LINEAR : GL_NEAREST;
+        _texture->set_filter_mode(texture_filter_mode);
     }
 
     void Sprite2D::set_repeat(int repeat_mode) {
