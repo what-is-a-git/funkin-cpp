@@ -5,6 +5,7 @@ build
 
 # SCons
 .sconsign*.dblite
+compile_commands.json
 
 # VSCode
 .vscode
