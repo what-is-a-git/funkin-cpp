@@ -1,8 +1,7 @@
 #include <glad/glad.h>
+#include <stdio.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb/stb_image.h"
-
+#include "assets/image.h"
 #include "core/rendering/texture.h"
 
 namespace crystal {
@@ -73,19 +72,16 @@ namespace crystal {
     Texture *Texture::get_from_file(const char *path, const int filter_mode, const int wrap_mode) {
         Texture *_return_texture = new Texture();
 
-        int width, height;
-        unsigned char *data = stbi_load(path, &width, &height, nullptr, 4);
+        Image image = Image::load_from_path(path);
 
-        if (data) {
-            _return_texture->load_texture(width, height, data, false);
+        if (image.get_data() != NULL) {
+            _return_texture->load_texture(image.size.x, image.size.y, image.get_data(), false);
             _return_texture->set_filter_mode(filter_mode);
             _return_texture->set_wrap_mode(wrap_mode);
             _return_texture->generate_mipmaps();
         } else {
             fprintf(stderr, "ERROR: Failed to load texture at path: %s\n", path);
         }
-
-        stbi_image_free(data);
 
         return _return_texture;
     }

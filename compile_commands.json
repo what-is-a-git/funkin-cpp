@@ -42,6 +42,12 @@
         "output": "build/dev/core-math.o"
     },
     {
+        "command": "g++ -o build/dev/core-string.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/crystal/core/string.cpp",
+        "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
+        "file": "src/crystal/core/string.cpp",
+        "output": "build/dev/core-string.o"
+    },
+    {
         "command": "g++ -o build/dev/core-input-server.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/crystal/core/input/input_server.cpp",
         "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
         "file": "src/crystal/core/input/input_server.cpp",
@@ -126,6 +132,18 @@
         "output": "build/dev/assets-server.o"
     },
     {
+        "command": "g++ -o build/dev/assets-image.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/crystal/assets/image.cpp",
+        "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
+        "file": "src/crystal/assets/image.cpp",
+        "output": "build/dev/assets-image.o"
+    },
+    {
+        "command": "g++ -o build/dev/assets-png.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/crystal/assets/png.cpp",
+        "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
+        "file": "src/crystal/assets/png.cpp",
+        "output": "build/dev/assets-png.o"
+    },
+    {
         "command": "gcc -o build/dev/glad.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/vendor/glad/glad.c",
         "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
         "file": "src/vendor/glad/glad.c",
@@ -136,6 +154,18 @@
         "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
         "file": "src/vendor/stb/stb_vorbis.c",
         "output": "build/dev/stb_vorbis.o"
+    },
+    {
+        "command": "g++ -o build/dev/funkin-title_screen.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/funkin/scene/title_screen.cpp",
+        "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
+        "file": "src/funkin/scene/title_screen.cpp",
+        "output": "build/dev/funkin-title_screen.o"
+    },
+    {
+        "command": "g++ -o build/dev/funkin-debug-cdi.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/funkin/debug/console_debug_info.cpp",
+        "directory": "/home/riley/Documents/Coding/C-Langs/projects/funkin-cpp",
+        "file": "src/funkin/debug/console_debug_info.cpp",
+        "output": "build/dev/funkin-debug-cdi.o"
     },
     {
         "command": "g++ -o build/dev/main.o -c -Wall -DTARGET=DEV -g -O0 -Iinclude -Iinclude/crystal -Iinclude/vendor -Iinclude/funkin src/main.cpp",

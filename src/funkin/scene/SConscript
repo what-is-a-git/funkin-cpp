@@ -1,0 +1,4 @@
+Import('env')
+Import('build_target')
+
+env.Object(target='#/' + build_target + 'funkin-title_screen', source=['title_screen.cpp'])

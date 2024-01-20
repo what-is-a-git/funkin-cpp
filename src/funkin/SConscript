@@ -1,2 +1,5 @@
 Import('env')
 Import('build_target')
+
+SConscript('scene/SConscript')
+SConscript('debug/SConscript')

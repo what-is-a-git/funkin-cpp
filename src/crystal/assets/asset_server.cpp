@@ -15,7 +15,7 @@ namespace crystal {
         // Preload assets
 
         // Textures
-        _texture_map.insert({ "MISSING_TEXTURE", Texture::get_from_file("assets/images/missing_texture.png", GL_LINEAR, GL_REPEAT) });
+        _texture_map.insert({ "MISSING_TEXTURE", Texture::get_from_file("assets/crystal/images/missing_texture.png", GL_LINEAR, GL_REPEAT) });
 
         // Shaders
         AssetServer::get_shader("BASIC_SHADER", "assets/shaders/basic.frag", "assets/shaders/basic.vert"); // aka COLOR_RECT_SHADER

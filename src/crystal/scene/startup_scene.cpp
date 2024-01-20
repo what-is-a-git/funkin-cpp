@@ -11,9 +11,7 @@ namespace crystal {
         _next_scene = next_scene;
     }
 
-    StartupScene::~StartupScene() {
-        _logo.~Sprite2D();
-    }
+    StartupScene::~StartupScene() {}
 
     void StartupScene::init(void) {
         _logo = Sprite2D(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, AssetServer::get_texture("assets/crystal/images/logo.png"));

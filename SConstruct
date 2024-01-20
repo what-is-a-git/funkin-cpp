@@ -24,7 +24,8 @@ build_target = 'build/' + target + '/'
 env = Environment(
     COMPILATIONDB_USE_ABSPATH=True,
     LIBPATH=['#/lib'],
-    LIBS=['glfw', 'openal', 'freetype'],
+    # keep in mind, this only works on linux for now i think, support for windows will be added in a later release
+    LIBS=['glfw', 'openal', 'freetype', 'zlib', 'png'],
     CPPPATH=['#/include', '#/include/crystal', '#/include/vendor', '#/include/funkin'],
     SCONS_CXX_STANDARD='cxx17',
     CCFLAGS=base_compilation_flags + additional_flags
@@ -40,6 +41,9 @@ if not 'no_compile_commands' in ARGUMENTS:
 
 Export('env')
 Export('build_target')
+
+# TODO: Convert the objects to libraries to make shit work on windows
+# ;-;
 
 # Compilation #
 SConscript('src/SConscript', exports='env', variant_dir='#/' + build_target, duplicate=0)

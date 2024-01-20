@@ -18,7 +18,7 @@ namespace crystal {
     double Engine::_draw_delay;
 
     // Suggestion: Separate this into a different class? Maybe.
-    // ThatOneDev - Dec 5, 2023
+    // what-is-a-git - Dec 5, 2023
     TransitionState Engine::_transition_state;
     Clock Engine::_transition_clock;
     Sprite2D *Engine::_transition_sprite;

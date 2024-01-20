@@ -8,6 +8,7 @@ env.Object(target='#/' + build_target + 'core-clock', source=['clock.cpp'])
 env.Object(target='#/' + build_target + 'core-file_system', source=['file_system.cpp'])
 env.Object(target='#/' + build_target + 'core-ref_counted', source=['ref_counted.cpp'])
 env.Object(target='#/' + build_target + 'core-math', source=['math.cpp'])
+env.Object(target='#/' + build_target + 'core-string', source=['string.cpp'])
 
 SConscript('input/SConscript')
 SConscript('audio/SConscript')

@@ -2,3 +2,5 @@ Import('env')
 Import('build_target')
 
 env.Object(target='#/' + build_target + 'assets-server', source=['asset_server.cpp'])
+env.Object(target='#/' + build_target + 'assets-image', source=['image.cpp'])
+env.Object(target='#/' + build_target + 'assets-png', source=['png.cpp'])

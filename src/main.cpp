@@ -10,11 +10,11 @@ int main(void) {
         (char*)"Friday Night Funkin'", // name //
         0, crystal::VSyncMode::OFF, // fps cap, vsync (no adaptive or any special stuff yet) //
         crystal::Color(0.0, 0.0, 0.0), // clear color //
-        new crystal::StartupScene(new crystal::Scene()), // scene //
+        new crystal::StartupScene(new funkin::TitleScreen()), // scene //
     };
 
     crystal::Engine::init(arguments);
-    // crystal::Engine::current_debug_info = new funkin::VisualDebugInfo();
+    crystal::Engine::current_debug_info = new funkin::ConsoleDebugInfo();
     crystal::RenderingServer::get_primary_window()->set_icon("assets/images/icon.png");
 
     while (!crystal::Engine::get_should_close()) {
