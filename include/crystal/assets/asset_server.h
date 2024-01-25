@@ -24,6 +24,7 @@ namespace crystal {
             static Texture *get_texture(const std::string path, const int filter_mode, const int wrap_mode);
 
             static void dispose_texture(const std::string key);
+            static void check_textures(void);
 
             // Uses .frag and .vert file extensions.
             static Shader *get_shader(const std::string path);

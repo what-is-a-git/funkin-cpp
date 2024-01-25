@@ -7,8 +7,8 @@
 namespace crystal {
     class StartupScene : public Scene {
         private:
-            Sprite2D _logo;
-            Sprite2D _logo_text;
+            Sprite2D *_logo;
+            Sprite2D *_logo_text;
             Clock _clock;
         public:
             Scene *_next_scene;

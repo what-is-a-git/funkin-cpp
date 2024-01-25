@@ -1,19 +1,21 @@
 #pragma once
 
+#include <stdlib.h>
+
 namespace crystal {
     class RefCounted {
-        private:
-            int _references;
         public:
+            size_t references;
+
             RefCounted();
-            ~RefCounted() = default;
+            ~RefCounted();
 
             void reference(void);
 
             // Automatically deletes self when no references are left.
+            
+            // WARNING: Doesn't delete self.
             void unreference(void);
-
-            int get_references(void);
     };
 }
 

@@ -2,10 +2,12 @@
 
 #include "glm/glm.hpp"
 
+#include "core/ref_counted.h"
+
 namespace crystal {
     typedef unsigned int native_texture;
 
-    class Texture {
+    class Texture : public RefCounted {
         private:
             native_texture _native_texture;
             glm::uvec2 _size;

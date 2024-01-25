@@ -149,10 +149,10 @@ namespace crystal {
         // These currently have no reason not to be hardcoded, so whatever.
         const float _vertices[16] = {
              // positions   // texture coords
-             0.0f,  1.0f,   0.0f, 0.0f,   // top left
-             0.0f,  0.0f,   0.0f, 1.0f,   // bottom left
-             1.0f,  0.0f,   1.0f, 1.0f,   // bottom right
-             1.0f,  1.0f,   1.0f, 0.0f    // top right 
+             0.0f,  1.0f,   0.0f, 1.0f,   // top left
+             0.0f,  0.0f,   0.0f, 0.0f,   // bottom left
+             1.0f,  0.0f,   1.0f, 0.0f,   // bottom right
+             1.0f,  1.0f,   1.0f, 1.0f    // top right 
         };
 
         const unsigned int _indices[6] = {

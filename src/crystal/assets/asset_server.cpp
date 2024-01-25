@@ -10,15 +10,17 @@ namespace crystal {
     std::unordered_map<std::string, AudioStream*> AssetServer::_audio_stream_map;
 
     void AssetServer::init(void) {
-        stbi_set_flip_vertically_on_load(true);
-
         // Preload assets
 
         // Textures
-        _texture_map.insert({ "MISSING_TEXTURE", Texture::get_from_file("assets/crystal/images/missing_texture.png", GL_LINEAR, GL_REPEAT) });
+        Texture *missing_texture = Texture::get_from_file("assets/crystal/images/missing_texture.png", GL_LINEAR, GL_REPEAT);
+        missing_texture->reference();
+
+        _texture_map.insert({ "MISSING_TEXTURE", missing_texture });
 
         // Shaders
         AssetServer::get_shader("BASIC_SHADER", "assets/shaders/basic.frag", "assets/shaders/basic.vert"); // aka COLOR_RECT_SHADER
+        AssetServer::get_shader("BATCHED_SHADER", "assets/shaders/sprite_2d.frag", "assets/shaders/basic.vert");
         AssetServer::get_shader("SPRITE_2D_SHADER", "assets/shaders/sprite_2d.frag", "assets/shaders/sprite_2d.vert");
         AssetServer::get_shader("TRANSITION_SHADER", "assets/shaders/transition.frag", "assets/shaders/basic.vert");
 
@@ -62,6 +64,28 @@ namespace crystal {
             Texture *_texture = _texture_map[key];
             delete _texture;
             _texture_map.erase(key);
+        }
+    }
+
+    void AssetServer::check_textures(void) {
+        auto iterator = _texture_map.begin();
+
+        while (iterator != _texture_map.end()) {
+            std::pair<std::string, Texture*> pair = *iterator;
+            Texture *texture = pair.second;
+            // printf("{ %s: %ld }\n", pair.first.c_str(), pair.second->references);
+
+            if (texture->references <= 0) {
+                if (texture->references < 0) {
+                    printf("WARNING: Texture has a reference count lower than 0, there is probably a referencing issue somewhere.\n");
+                }
+
+                iterator = _texture_map.erase(iterator);
+                delete texture;
+                continue;
+            }
+
+            iterator++;
         }
     }
 

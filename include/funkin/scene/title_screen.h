@@ -1,12 +1,12 @@
 #pragma once
 
 #include "scene/scene.h"
-#include "scene/batched_sprites.h"
+#include "scene/sprite_2d.h"
 
 namespace funkin {
     class TitleScreen : public crystal::Scene {
         public:
-            crystal::BatchedSprites *batched_sprites;
+            crystal::Sprite2D *girlfriend;
 
             TitleScreen();
             virtual ~TitleScreen();

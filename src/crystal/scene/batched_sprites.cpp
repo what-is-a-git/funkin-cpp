@@ -27,7 +27,7 @@ namespace crystal {
 
         texture = AssetServer::get_texture("MISSING_TEXTURE");
 
-        shader = AssetServer::get_shader("SPRITE_2D_SHADER");
+        shader = AssetServer::get_shader("BATCHED_SHADER");
         RenderingServer::use_shader(shader);
         shader->set_uniform_int("TEXTURE", 0);
 
@@ -47,6 +47,9 @@ namespace crystal {
             refresh(false);
         }
 
+        // quick and dirty fix for this, should work just fine for now :/
+        // later fix: just add set_texture function lol
+        texture->reference();
         RenderingServer::bind_texture(texture);
         
         RenderingServer::use_shader(shader);
@@ -61,6 +64,7 @@ namespace crystal {
 
         glBindVertexArray(_vertex_array_object);
         glDrawArrays(GL_TRIANGLES, 0, _vertex_count);
+        texture->unreference();
     }
 
     void BatchedSprites::refresh(bool recreate_buffer) {
@@ -94,14 +98,14 @@ namespace crystal {
 
             glm::vec4 vertex[6] = {
                 // vertex 1 (top left triangle)
-                glm::vec4(0.0f, 1.0f, source_rect.x, source_rect.y), // top left
-                glm::vec4(0.0f, 0.0f, source_rect.x, source_rect.w), // bottom left
-                glm::vec4(1.0f, 1.0f, source_rect.z, source_rect.y), // top right 
+                glm::vec4(0.0f, 1.0f, source_rect.x, source_rect.w), // top left
+                glm::vec4(0.0f, 0.0f, source_rect.x, source_rect.y), // bottom left
+                glm::vec4(1.0f, 1.0f, source_rect.z, source_rect.w), // top right
 
                 // vertex 2 (bottom right triangle)
-                glm::vec4(0.0f, 0.0f, source_rect.x, source_rect.w), // bottom left
-                glm::vec4(1.0f, 0.0f, source_rect.z, source_rect.w), // bottom right
-                glm::vec4(1.0f, 1.0f, source_rect.z, source_rect.y) // top right 
+                glm::vec4(0.0f, 0.0f, source_rect.x, source_rect.y), // bottom left
+                glm::vec4(1.0f, 0.0f, source_rect.z, source_rect.y), // bottom right
+                glm::vec4(1.0f, 1.0f, source_rect.z, source_rect.w) // top right
             };
 
             if (_vertex_count + 6 >= _vertex_max_count - 1 && sprites.end().base() != &sprite) {

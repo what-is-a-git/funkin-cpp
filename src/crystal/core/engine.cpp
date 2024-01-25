@@ -61,7 +61,7 @@ namespace crystal {
 
         // This is a sprite because in the future we might want to do more with transitions
         // than just a simple slide. Thanks! <3
-        _transition_sprite = new Sprite2D(0.0, 0.0, nullptr);
+        _transition_sprite = new Sprite2D(0.0, 0.0, NULL);
         _transition_sprite->set_size(GAME_SIZE);
         _transition_sprite->origin = glm::dvec2(0.0);
         _transition_sprite->shader = AssetServer::get_shader("TRANSITION_SHADER");
@@ -116,6 +116,9 @@ namespace crystal {
             _transition_scene->on_switch_dispose();
             _current_scene->init();
             delete _transition_scene;
+
+            // do this to get rid of old unused textures!!! :3
+            AssetServer::check_textures(); 
 
             // We have to use it here because _current_scene->init() can cause a shader state change.
             _transition_shader->use();

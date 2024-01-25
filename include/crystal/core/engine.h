@@ -53,7 +53,7 @@ namespace crystal {
             static double _draw_delay;
 
             // Suggestion: Separate this into a different class? Maybe.
-            // ThatOneDev - Dec 5, 2023
+            // what-is-a-git - Dec 5, 2023
             static TransitionState _transition_state;
             static Clock _transition_clock;
             static Sprite2D *_transition_sprite;

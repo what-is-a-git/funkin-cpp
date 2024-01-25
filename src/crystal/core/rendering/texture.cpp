@@ -71,7 +71,6 @@ namespace crystal {
 
     Texture *Texture::get_from_file(const char *path, const int filter_mode, const int wrap_mode) {
         Texture *_return_texture = new Texture();
-
         Image image = Image::load_from_path(path);
 
         if (image.get_data() != NULL) {

@@ -4,8 +4,13 @@
 #include "scene/sprite_2d.h"
 
 namespace crystal {
-    Sprite2D::Sprite2D() {};
-    Sprite2D::~Sprite2D() {};
+    Sprite2D::~Sprite2D() {
+        if (_texture == NULL) {
+            return;
+        }
+        
+        _texture->unreference();
+    }
 
     Sprite2D::Sprite2D(double x, double y) {
         active = true;
@@ -16,11 +21,11 @@ namespace crystal {
         tint = COLOR_WHITE;
         source_rect = glm::vec4(0.0f, 0.0f, -1.0f, -1.0f);
 
-        load_texture("MISSING_TEXTURE");
+        _texture = NULL;
+        shader = NULL;
 
+        load_texture("MISSING_TEXTURE");
         load_shader("SPRITE_2D_SHADER");
-        RenderingServer::use_shader(shader);
-        shader->set_uniform_int("TEXTURE", 0);
     }
 
     Sprite2D::Sprite2D(double x, double y, Texture *texture) {
@@ -32,23 +37,28 @@ namespace crystal {
         tint = COLOR_WHITE;
         source_rect = glm::vec4(0.0f, 0.0f, -1.0f, -1.0f);
 
+        _texture = NULL;
+        shader = NULL;
+
         set_texture(texture);
-
         load_shader("SPRITE_2D_SHADER");
-        RenderingServer::use_shader(shader);
-
-        if (_texture != nullptr) {
-            shader->set_uniform_int("TEXTURE", 0);
-        }
     }
 
     void Sprite2D::draw(void) {
         RenderingServer::bind_texture(_texture);
         
-        RenderingServer::use_shader(shader);
+        shader->use();
         shader->set_uniform_mat4("PROJECTION", RenderingServer::default_projection);
 
-        glm::dvec2 size = (glm::dvec2)_size * scale;
+        if (source_rect.z < 0.0f) {
+            source_rect.z = _size.x;
+        }
+
+        if (source_rect.w < 0.0f) {
+            source_rect.w = _size.y;
+        }
+
+        glm::dvec2 size = glm::dvec2(source_rect.z, source_rect.w) * scale;
 
         _transform = glm::mat4(1.0f);
         _transform = glm::translate(_transform, glm::vec3(position + (-origin * size), 0.0f));
@@ -62,6 +72,12 @@ namespace crystal {
         _transform = glm::scale(_transform, glm::vec3(size, 1.0f));
         shader->set_uniform_mat4("TRANSFORM", _transform);
         shader->set_uniform_color("TINT", tint);
+
+        glm::vec4 _source_rect = glm::vec4(source_rect.x / _size.x, source_rect.y / _size.y,
+                (source_rect.x + source_rect.z) / _size.x, (source_rect.y + source_rect.w) / _size.y);
+
+        shader->set_uniform_vec4("SOURCE_RECT", _source_rect);
+        shader->set_uniform_int("TEXTURE", 0);
 
         RenderingServer::draw_quad();
     }
@@ -106,11 +122,18 @@ namespace crystal {
     }
 
     void Sprite2D::set_texture(Texture *texture) {
-        _texture = texture;
-
-        if (_texture != nullptr) {
-            _size = _texture->get_size();
+        if (_texture != NULL) {
+            _texture->unreference();
         }
+
+        if (texture == NULL) {
+            _texture = NULL;
+            return;
+        }
+
+        _texture = texture;
+        _texture->reference();
+        _size = _texture->get_size();
     }
 
     void Sprite2D::load_shader(const std::string path) {

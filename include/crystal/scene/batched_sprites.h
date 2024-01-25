@@ -13,6 +13,7 @@ namespace crystal {
         glm::vec4 source_rect;
         glm::dvec2 position, scale, origin;
         double rotation;
+        void *meta;
     } batched_sprite;
 
     enum BatchingMode {

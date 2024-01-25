@@ -92,14 +92,11 @@ namespace crystal {
 
     // icon
     void Window::set_icon(const char *path) {
-        stbi_set_flip_vertically_on_load(false);
-
+        // TODO: Use image class lol
         GLFWimage icon;
         icon.pixels = stbi_load(path, &icon.width, &icon.height, nullptr, 4);
         glfwSetWindowIcon(_native_window, 1, &icon);
         stbi_image_free(icon.pixels);
-
-        stbi_set_flip_vertically_on_load(true);
     }
 
     // should_close

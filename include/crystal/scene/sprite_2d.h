@@ -30,7 +30,10 @@ namespace crystal {
 
             int texture_filter_mode, texture_wrap_mode;
 
-            Sprite2D();
+            // This actually causes issues with texture caching so we CAN'T allow it.
+            // It's also just better practice to not let it happen so... :3
+            Sprite2D() = delete;
+            
             Sprite2D(double x, double y);
             Sprite2D(double x, double y, Texture *texture);
             virtual ~Sprite2D();

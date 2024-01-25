@@ -103,21 +103,15 @@ namespace crystal {
             return NULL;
         }
 
-        // we flip the vertical axis because opengl is too attractive
-        // - what-is-a-git 2024
-
-        // btw if ur image has a height of 0 then the loop doesn't run so this race condition shouldn't be met????
-        // i hope so
-        unsigned int height_minus_one = size->y - 1;
-
-        for (unsigned int i = 0; i < size->y; i++) {
-            row_pointers[height_minus_one - i] = image + i * row_bytes;
+        for(unsigned long i = 0; i < size->y; i++) {
+            row_pointers[i] = image + i * row_bytes;
         }
 
         png_read_image(png_ptr, row_pointers);
         png_read_end(png_ptr, info_ptr);
 
         free(row_pointers);
+        free(file.data);
 
         png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
         return image;
