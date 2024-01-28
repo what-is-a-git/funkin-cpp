@@ -32,13 +32,14 @@ namespace crystal {
             unsigned int _vertex_array_object, _vertex_buffer_object;
             size_t _vertex_capacity, _vertex_count, _vertex_max_count;
             glm::vec4 *_vertices;
+
+            Texture *_texture;
         public:
             glm::dvec2 position;
             glm::dvec2 scale;
 
             Color tint;
             Shader *shader;
-            Texture *texture;
 
             std::vector<batched_sprite> sprites;
 
@@ -49,6 +50,9 @@ namespace crystal {
             virtual void draw(void);
 
             virtual void refresh(bool recreate_buffer);
+
+            void set_texture(Texture *texture);
+            Texture *get_texture(void);
 
             void add_batched_sprite(batched_sprite sprite);
 

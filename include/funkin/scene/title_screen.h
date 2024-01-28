@@ -2,6 +2,7 @@
 
 #include "scene/scene.h"
 #include "scene/sprite_2d.h"
+#include "scene/batched_sprites.h"
 
 namespace funkin {
     class TitleScreen : public crystal::Scene {

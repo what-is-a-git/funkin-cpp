@@ -25,7 +25,8 @@ namespace crystal {
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
 
-        texture = AssetServer::get_texture("MISSING_TEXTURE");
+        _texture = NULL;
+        set_texture(AssetServer::get_texture("MISSING_TEXTURE"));
 
         shader = AssetServer::get_shader("BATCHED_SHADER");
         RenderingServer::use_shader(shader);
@@ -49,8 +50,7 @@ namespace crystal {
 
         // quick and dirty fix for this, should work just fine for now :/
         // later fix: just add set_texture function lol
-        texture->reference();
-        RenderingServer::bind_texture(texture);
+        RenderingServer::bind_texture(_texture);
         
         RenderingServer::use_shader(shader);
         shader->set_uniform_mat4("PROJECTION", RenderingServer::default_projection);
@@ -64,12 +64,11 @@ namespace crystal {
 
         glBindVertexArray(_vertex_array_object);
         glDrawArrays(GL_TRIANGLES, 0, _vertex_count);
-        texture->unreference();
     }
 
     void BatchedSprites::refresh(bool recreate_buffer) {
         _vertex_count = 0;
-        glm::uvec2 _size = texture->get_size();
+        glm::uvec2 _size = _texture->get_size();
 
         for (batched_sprite sprite : sprites) {
             glm::dvec2 size = (glm::dvec2)_size * sprite.scale;
@@ -144,6 +143,24 @@ namespace crystal {
 
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(glm::vec4) * _vertex_count,
                         _vertices);
+    }
+
+    void BatchedSprites::set_texture(Texture *texture) {
+        if (_texture != NULL) {
+            _texture->unreference();
+        }
+
+        if (texture == NULL) {
+            _texture = NULL;
+            return;
+        }
+
+        _texture = texture;
+        _texture->reference();
+    }
+
+    Texture *BatchedSprites::get_texture(void) {
+        return _texture;
     }
 
     void BatchedSprites::add_batched_sprite(batched_sprite sprite) {
