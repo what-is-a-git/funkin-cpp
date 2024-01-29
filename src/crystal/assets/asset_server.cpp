@@ -20,8 +20,8 @@ namespace crystal {
 
         // Shaders
         AssetServer::get_shader("BASIC_SHADER", "assets/shaders/basic.frag", "assets/shaders/basic.vert"); // aka COLOR_RECT_SHADER
-        AssetServer::get_shader("BATCHED_SHADER", "assets/shaders/sprite_2d.frag", "assets/shaders/basic.vert");
-        AssetServer::get_shader("SPRITE_2D_SHADER", "assets/shaders/sprite_2d.frag", "assets/shaders/sprite_2d.vert");
+        AssetServer::get_shader("BATCHED_SHADER", "assets/shaders/sprite.frag", "assets/shaders/basic.vert");
+        AssetServer::get_shader("SPRITE_SHADER", "assets/shaders/sprite.frag", "assets/shaders/sprite.vert");
         AssetServer::get_shader("TRANSITION_SHADER", "assets/shaders/transition.frag", "assets/shaders/basic.vert");
 
         // Sounds (not even preloadable rn)

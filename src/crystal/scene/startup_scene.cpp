@@ -17,10 +17,10 @@ namespace crystal {
     }
 
     void StartupScene::init(void) {
-        _logo = new Sprite2D(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, AssetServer::get_texture("assets/crystal/images/logo.png"));
+        _logo = new Sprite(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, AssetServer::get_texture("assets/crystal/images/logo.png"));
         _logo->scale = glm::dvec2(0.0);
 
-        _logo_text = new Sprite2D(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, AssetServer::get_texture("assets/crystal/images/logo_text.png"));
+        _logo_text = new Sprite(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, AssetServer::get_texture("assets/crystal/images/logo_text.png"));
         _logo_text->scale = glm::dvec2(0.0);
 
         _clock = Clock();

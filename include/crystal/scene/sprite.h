@@ -9,7 +9,7 @@
 #include "assets/asset_server.h"
 
 namespace crystal {
-    class Sprite2D {
+    class Sprite {
         private:
             glm::uvec2 _size;
             Texture *_texture;
@@ -32,11 +32,11 @@ namespace crystal {
 
             // This actually causes issues with texture caching so we CAN'T allow it.
             // It's also just better practice to not let it happen so... :3
-            Sprite2D() = delete;
+            Sprite() = delete;
             
-            Sprite2D(double x, double y);
-            Sprite2D(double x, double y, Texture *texture);
-            virtual ~Sprite2D();
+            Sprite(double x, double y);
+            Sprite(double x, double y, Texture *texture);
+            virtual ~Sprite();
 
             // No real use to this by default.
             virtual void step(double delta) {};

@@ -2,11 +2,11 @@
 
 #include <glm/glm.hpp>
 
-#include <png.h>
+#include <png/png.h>
 #include <stdlib.h>
 
 namespace crystal {
-    typedef struct {
+    typedef struct _png_io {
         unsigned char *data;
         size_t bytes_left;
     } png_io;

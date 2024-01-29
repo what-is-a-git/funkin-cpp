@@ -4,6 +4,7 @@
 #include "core/input/input_server.h"
 
 #include "assets/asset_server.h"
+#include "assets/sparrow.h"
 #include "core/audio/audio_server.h"
 
 #include "funkin/audio.h"
@@ -26,8 +27,12 @@ namespace funkin {
             Audio::streams["MUSIC"] = music;
         }
 
-        girlfriend = new crystal::Sprite2D(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, crystal::AssetServer::get_texture("assets/images/menus/title_screen/gf.png"));
-        girlfriend->source_rect = glm::vec4(0.0f, 0.0f, 717.0f, 648.0f);
+        girlfriend = new crystal::Sprite(GAME_SIZE.x * 0.5, GAME_SIZE.y * 0.5, crystal::AssetServer::get_texture("assets/images/menus/title_screen/gf.png"));
+
+        std::list<crystal::sparrow_frame> frames = crystal::Sparrow::load_from_path("assets/images/menus/title_screen/gf.xml");
+        girlfriend->source_rect = crystal::Sparrow::get_frame(frames, "gfDance0029").source_rect;
+        crystal::Sparrow::free_frame_names(frames);
+        // the rest of the list should be freed automatically by the stack and shit because this is on the stack :]
     }
 
     void TitleScreen::step(const double delta) {

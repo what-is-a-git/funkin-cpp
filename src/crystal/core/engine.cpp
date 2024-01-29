@@ -21,7 +21,7 @@ namespace crystal {
     // what-is-a-git - Dec 5, 2023
     TransitionState Engine::_transition_state;
     Clock Engine::_transition_clock;
-    Sprite2D *Engine::_transition_sprite;
+    Sprite *Engine::_transition_sprite;
     Shader *Engine::_transition_shader;
     Scene *Engine::_transition_scene;
 
@@ -61,7 +61,7 @@ namespace crystal {
 
         // This is a sprite because in the future we might want to do more with transitions
         // than just a simple slide. Thanks! <3
-        _transition_sprite = new Sprite2D(0.0, 0.0, NULL);
+        _transition_sprite = new Sprite(0.0, 0.0, NULL);
         _transition_sprite->set_size(GAME_SIZE);
         _transition_sprite->origin = glm::dvec2(0.0);
         _transition_sprite->shader = AssetServer::get_shader("TRANSITION_SHADER");

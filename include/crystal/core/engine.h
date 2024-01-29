@@ -10,7 +10,7 @@
 #include "core/math.h"
 
 #include "scene/scene.h"
-#include "scene/sprite_2d.h"
+#include "scene/sprite.h"
 
 #define GAME_SIZE crystal::Engine::size
 
@@ -56,7 +56,7 @@ namespace crystal {
             // what-is-a-git - Dec 5, 2023
             static TransitionState _transition_state;
             static Clock _transition_clock;
-            static Sprite2D *_transition_sprite;
+            static Sprite *_transition_sprite;
             static Shader *_transition_shader;
             static Scene *_transition_scene;
         public:

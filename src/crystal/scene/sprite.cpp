@@ -1,10 +1,10 @@
 #include <glad/glad.h>
 
 #include "core/engine.h"
-#include "scene/sprite_2d.h"
+#include "scene/sprite.h"
 
 namespace crystal {
-    Sprite2D::~Sprite2D() {
+    Sprite::~Sprite() {
         if (_texture == NULL) {
             return;
         }
@@ -12,7 +12,7 @@ namespace crystal {
         _texture->unreference();
     }
 
-    Sprite2D::Sprite2D(double x, double y) {
+    Sprite::Sprite(double x, double y) {
         active = true;
         position = glm::dvec2(x, y);
         scale = glm::dvec2(1.0, 1.0);
@@ -25,10 +25,10 @@ namespace crystal {
         shader = NULL;
 
         load_texture("MISSING_TEXTURE");
-        load_shader("SPRITE_2D_SHADER");
+        load_shader("SPRITE_SHADER");
     }
 
-    Sprite2D::Sprite2D(double x, double y, Texture *texture) {
+    Sprite::Sprite(double x, double y, Texture *texture) {
         active = true;
         position = glm::dvec2(x, y);
         scale = glm::dvec2(1.0, 1.0);
@@ -41,10 +41,10 @@ namespace crystal {
         shader = NULL;
 
         set_texture(texture);
-        load_shader("SPRITE_2D_SHADER");
+        load_shader("SPRITE_SHADER");
     }
 
-    void Sprite2D::draw(void) {
+    void Sprite::draw(void) {
         RenderingServer::bind_texture(_texture);
         
         shader->use();
@@ -84,44 +84,44 @@ namespace crystal {
 
     // Technically just a shortcut for setting texture_filter_mode
     // may be helpful in cases where including glad/glad.h isn't ideal or wanted.
-    void Sprite2D::set_antialiased(bool antialiased) {
+    void Sprite::set_antialiased(bool antialiased) {
         texture_filter_mode = antialiased ? GL_LINEAR : GL_NEAREST;
         _texture->set_filter_mode(texture_filter_mode);
     }
 
-    void Sprite2D::set_repeat(int repeat_mode) {
+    void Sprite::set_repeat(int repeat_mode) {
         texture_wrap_mode = repeat_mode;
         _texture->set_wrap_mode(texture_wrap_mode);
     }
 
-    double Sprite2D::get_rotation_degrees(void) {
+    double Sprite::get_rotation_degrees(void) {
         return glm::degrees(rotation);
     }
 
-    void Sprite2D::set_rotation_degrees(double rotation_degrees) {
+    void Sprite::set_rotation_degrees(double rotation_degrees) {
         rotation = glm::radians(rotation_degrees);
     }
 
-    glm::uvec2 Sprite2D::get_size(void) {
+    glm::uvec2 Sprite::get_size(void) {
         return _size;
     }
 
     // Only use if you know what you're doing.
-    void Sprite2D::set_size(glm::uvec2 size) {
+    void Sprite::set_size(glm::uvec2 size) {
         _size = size;
     }
 
     // Lots of variables
     
-    void Sprite2D::load_texture(const std::string path) {
+    void Sprite::load_texture(const std::string path) {
         set_texture(AssetServer::get_texture(path));
     }
 
-    Texture *Sprite2D::get_texture(void) {
+    Texture *Sprite::get_texture(void) {
         return _texture;
     }
 
-    void Sprite2D::set_texture(Texture *texture) {
+    void Sprite::set_texture(Texture *texture) {
         if (_texture != NULL) {
             _texture->unreference();
         }
@@ -136,7 +136,7 @@ namespace crystal {
         _size = _texture->get_size();
     }
 
-    void Sprite2D::load_shader(const std::string path) {
+    void Sprite::load_shader(const std::string path) {
         shader = AssetServer::get_shader(path);
     }
 }
