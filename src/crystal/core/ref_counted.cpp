@@ -11,8 +11,6 @@ namespace crystal {
         references++;
     }
 
-    // Automatically deletes self when no references are left.
-
     // WARNING: Doesn't delete self.
     void RefCounted::unreference(void) {
         references--;
