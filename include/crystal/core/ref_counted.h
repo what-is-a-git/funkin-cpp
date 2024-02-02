@@ -12,8 +12,6 @@ namespace crystal {
 
             void reference(void);
 
-            // Automatically deletes self when no references are left.
-            
             // WARNING: Doesn't delete self.
             void unreference(void);
     };
