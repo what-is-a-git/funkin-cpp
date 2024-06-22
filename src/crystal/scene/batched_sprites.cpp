@@ -107,7 +107,7 @@ namespace crystal {
                 glm::vec4(1.0f, 1.0f, source_rect.z, source_rect.w) // top right
             };
 
-            if (_vertex_count + 6 >= _vertex_max_count - 1 && sprites.end().base() != &sprite) {
+            if (_vertex_count + 6 >= _vertex_max_count - 1 && &(*sprites.end()) != &sprite) {
                 _vertex_count = 0;
                 _vertex_max_count *= 2;
 

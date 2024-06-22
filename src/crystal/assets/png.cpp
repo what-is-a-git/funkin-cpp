@@ -61,13 +61,12 @@ namespace crystal {
         state.data = file.data;
         state.bytes_left = file.size;
 
-        png_set_read_fn(png_ptr, &state, libpng_read);
-
-        if (png_sig_cmp((png_bytep) file.data, 0, 8)) {
+        if (png_sig_cmp(file.data, 0, 8) != 0) {
             fprintf(stderr, "libpng error: Invalid file signature.\n");
             return NULL;
         }
 
+        png_set_read_fn(png_ptr, &state, libpng_read);
         png_read_info(png_ptr, info_ptr);
 
         if (!png_get_IHDR(png_ptr, info_ptr, &size->x, &size->y, &bit_depth, &colour_type,

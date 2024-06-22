@@ -3,7 +3,7 @@
 
 #include "core/file_system.h"
 
-#ifdef WIN32
+#if defined(_WIN32)
 #include <io.h>
 #define F_OK 0
 #define access _access
@@ -57,7 +57,7 @@ namespace crystal {
             return binary;
         }
 
-        FILE *file = fopen(path, "r");
+        FILE *file = fopen(path, "rb");
 
         if (file == NULL) {
             fprintf(stderr, "ERROR: Couldn't open file at path: %s\n", path);
@@ -69,13 +69,17 @@ namespace crystal {
         _file_size = ftell(file);
         fseek(file, 0, SEEK_SET);
 
-        unsigned char *_output = (unsigned char*) malloc(_file_size);
-        fread(_output, _file_size, 1, file);
+        unsigned char *_output = (unsigned char*) malloc(_file_size * sizeof(unsigned char));
+        const size_t _read_size = fread(_output, sizeof(unsigned char), _file_size / sizeof(unsigned char), file);
         fclose(file);
+
+        if (_read_size != _file_size) {
+            fprintf(stderr, "ERROR: Read incorrect amount of bytes in file at path: %s\n", path);
+            return binary;
+        }
 
         binary.data = _output;
         binary.size = _file_size;
-
         return binary;
     }
 

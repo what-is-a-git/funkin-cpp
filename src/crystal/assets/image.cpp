@@ -29,22 +29,21 @@ namespace crystal {
 
     // uses libpng or similar backend as first pick if supported
     // stb image is the fallback because it's simpler BUT slower in most cases
-    Image Image::load_from_path(const char *path) {
-        Image image = Image();
+    Image *Image::load_from_path(const char *path) {
+        Image *image = new Image();
         char *extension = string_get_extension(path);
 
         if (strcmp(extension, "png") == 0) {
-            image._data = PNG::load_rgba8_from_path(path, &image.size);
+            image->_data = PNG::load_rgba8_from_path(path, &image->size);
         } else {
             int width, height;
 
-            image._data = stbi_load(path, &width, &height, nullptr, 4);
+            image->_data = stbi_load(path, &width, &height, NULL, 4);
             // we have to do this because size_t can't just be int ig :/
-            image.size = glm::uvec2(width, height);
+            image->size = glm::uvec2(width, height);
         }
 
         free(extension);
-
         return image;
     }
 }

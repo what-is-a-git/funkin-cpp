@@ -71,10 +71,10 @@ namespace crystal {
 
     Texture *Texture::get_from_file(const char *path, const int filter_mode, const int wrap_mode) {
         Texture *_return_texture = new Texture();
-        Image image = Image::load_from_path(path);
+        Image *image = Image::load_from_path(path);
 
-        if (image.get_data() != NULL) {
-            _return_texture->load_texture(image.size.x, image.size.y, image.get_data(), false);
+        if (image->get_data() != NULL) {
+            _return_texture->load_texture(image->size.x, image->size.y, image->get_data(), false);
             _return_texture->set_filter_mode(filter_mode);
             _return_texture->set_wrap_mode(wrap_mode);
             _return_texture->generate_mipmaps();
@@ -82,6 +82,7 @@ namespace crystal {
             fprintf(stderr, "ERROR: Failed to load texture at path: %s\n", path);
         }
 
+        delete image;
         return _return_texture;
     }
 }

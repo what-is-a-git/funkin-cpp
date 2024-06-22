@@ -17,6 +17,6 @@ namespace crystal {
 
             // uses libpng or similar backend as first pick if supported
             // stb image is the fallback because it's simpler BUT slower in most cases
-            static Image load_from_path(const char *path);
+            static Image *load_from_path(const char *path);
     };
 }

@@ -1,5 +1,6 @@
 #include "core/audio/audio_server.h"
 
+#include "AL/alext.h"
 #include <glm/gtc/type_ptr.hpp>
 
 namespace crystal {
@@ -22,8 +23,18 @@ namespace crystal {
 			exit(1);
 		}
 
-		// Make audio context
-		_context = alcCreateContext(_device, nullptr);
+        // Make audio context
+        #if ALC_SOFT_HRTF // we want to not have this because headphone users can have weird sounding audio if we do
+        ALCint attrs[] = {
+            ALC_HRTF_SOFT, ALC_FALSE, // request NO HRTF
+            0 // end of list
+        };
+
+        _context = alcCreateContext(_device, attrs);
+        #else // cry about it
+        printf("WARNING: Creating OpenAL context without ALC_SOFT_HRTF, this is not recommended!\n");
+        _context = alcCreateContext(_device, NULL);
+        #endif
 
 		// Activate context
 		if (!alcMakeContextCurrent(_context)) {
